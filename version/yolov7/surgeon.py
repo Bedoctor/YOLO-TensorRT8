@@ -31,6 +31,13 @@ def model2deploy(weights, device=None, end2end=False, config=None, **kwargs):
                 delattr(m, 'anchor_grid')
                 setattr(m, 'anchor_grid', [torch.zeros(1)] * m.nl)
 
+        elif check(t, 'IDetect'):
+            m.inplace = inplace
+            m.__class__ = Detect
+            if not isinstance(m.anchor_grid, list):
+                delattr(m, 'anchor_grid')
+                setattr(m, 'anchor_grid', [torch.zeros(1)] * m.nl)
+
         elif check(t, 'Model'):
             m.inplace = inplace
             m.__class__ = Model
