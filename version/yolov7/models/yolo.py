@@ -167,7 +167,7 @@ class IDetect(nn.Module):
 
             z.append(y.view(bs, -1, self.no))
 
-        return (x if self.training else (torch.cat(z, 1), ) if self.export else
+        return (x if self.training else torch.cat(z, 1) if self.export else
                 (torch.cat(z, 1), x))
 
     @staticmethod
